@@ -9,8 +9,12 @@ export default async function IdentityExamplePage() {
 
   try {
     data = await api.get<WhoAmI>("/identity/whoami");
-  } catch (e: any) {
-    err = e?.message ?? "Unknown error";
+  } catch (e: unknown) {
+        if (e instanceof Error) {
+      err = e.message;
+    } else {
+      err = "Unknown error";
+    }
   }
 
   return (
