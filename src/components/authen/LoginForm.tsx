@@ -2,16 +2,16 @@
 import React, { useState } from "react";
 
 type LoginFormProps = {
-  onSubmit: (data: { hospitalNumber: string; password: string }) => void;
+  onSubmit: (data: { username: string; password: string }) => void;
 };
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
-  const [hospitalNumber, setHospitalNumber] = useState("");
+  const [username, setHospitalNumber] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ hospitalNumber, password });
+    onSubmit({ username, password });
   };
 
   return (
@@ -20,7 +20,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         Hospital Number
         <input
           type="text"
-          value={hospitalNumber}
+          value={username}
           onChange={(e) => setHospitalNumber(e.target.value)}
           className="border border-gray-300 p-2 rounded-md bg-white"
           required

@@ -1,20 +1,35 @@
 "use client";
 import { LoginForm } from "@/components/authen/LoginForm";
 import { RegisterForm } from "@/components/authen/RegisterForm";
-import React, { act, useState } from "react";
+import React, { useState } from "react";
+import { Login, Register } from "@/lib/authentication";
+
+enum AuthTab {
+  LOGIN = "login",
+  REGISTER = "register",
+}
 
 const Authentication = () => {
-  const [activeTab, setActiveTab] = useState<"login" | "register">("login");
+  const [activeTab, setActiveTab] = useState<AuthTab>(AuthTab.LOGIN);
 
-    const handleSubmit = (data: any) => {
-    console.log(`${activeTab} form submitted:`, data);
+  const handleSubmit = async (payload: any) => {
+    // payload = {username: "HN25000003", password: "mypassword"};
+    // payload = {
+    //   id_card: "1234567890129",
+    //   name: "John4",
+    //   lastname: "Doe",
+    //   phone: "0890000000",
+    //   password: "mypassword",
+    //   confirmPassword: "mypassword",
+    // };
+    console.log(`${activeTab} form submitted:`, payload);
 
-    if (activeTab === "login") {
-        // fetch("/api/auth/login", { method: "POST", body: JSON.stringify(data) })
+    if (activeTab === AuthTab.LOGIN) {
+      Login(payload);
     } else {
-        // fetch("/api/auth/register", { method: "POST", body: JSON.stringify(data) })
+      Register(payload);
     }
-    };
+  };
 
   return (
     <main className="flex p-8 justify-center">
@@ -28,17 +43,17 @@ const Authentication = () => {
                   ? "bg-white text-blue-600"
                   : "bg-gray-200 text-gray-600"
               }`}
-              onClick={() => setActiveTab("login")}
+              onClick={() => setActiveTab(AuthTab.LOGIN)}
             >
               Login
             </button>
             <button
               className={`w-1/2 p-2 ${
-                activeTab === "register"
+                activeTab === AuthTab.REGISTER
                   ? "bg-white text-blue-600"
                   : "bg-gray-200 text-gray-600"
               }`}
-              onClick={() => setActiveTab("register")}
+              onClick={() => setActiveTab(AuthTab.REGISTER)}
             >
               Register
             </button>
@@ -51,9 +66,9 @@ const Authentication = () => {
             </div>
 
             {activeTab === "login" ? (
-                <LoginForm onSubmit={(data) => handleSubmit(data)} />
+              <LoginForm onSubmit={(data) => handleSubmit(data)} />
             ) : (
-                <RegisterForm onSubmit={(data) => handleSubmit(data)} />
+              <RegisterForm onSubmit={(data) => handleSubmit(data)} />
             )}
           </div>
         </div>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 type RegisterFormProps = {
   onSubmit: (data: {
-    idCard: string;
+    id_card: string;
     name: string;
     lastname: string;
     phone: string;
@@ -14,7 +14,7 @@ type RegisterFormProps = {
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
   const [form, setForm] = useState({
-    idCard: "",
+    id_card: "",
     name: "",
     lastname: "",
     phone: "",
@@ -34,7 +34,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       {[
-        { label: "ID Card", key: "idCard", type: "text" },
+        { label: "ID Card", key: "id_card", type: "text" },
         { label: "Name", key: "name", type: "text" },
         { label: "Lastname", key: "lastname", type: "text" },
         { label: "Phone", key: "phone", type: "tel" },
